@@ -54,6 +54,7 @@ BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
 
 # Platform
@@ -112,13 +113,18 @@ RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/tombstoned
 
 TARGET_RECOVERY_DEVICE_MODULES += \
     libandroidicu \
-    libxml2
+    libxml2 \
+    vendor.display.config@1.0 \
+    vendor.display.config@2.0
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
+    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
+    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
 
--include $(DEVICE_PATH)/BoardConfigOFOX.mk
--include $(DEVICE_PATH)/BoardConfigPBRP.mk
--include $(DEVICE_PATH)/BoardConfigSHRP.mk
+
+include $(DEVICE_PATH)/BoardConfigOFOX.mk
+include $(DEVICE_PATH)/BoardConfigPBRP.mk
+include $(DEVICE_PATH)/BoardConfigSHRP.mk
 -include vendor/kud/config/recovery.mk
 -include vendor/extras/board.mk
