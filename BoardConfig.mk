@@ -123,7 +123,6 @@ RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
 
 
-include $(DEVICE_PATH)/BoardConfigOFOX.mk
 include $(DEVICE_PATH)/BoardConfigPBRP.mk
 include $(DEVICE_PATH)/BoardConfigSHRP.mk
 -include vendor/kud/config/recovery.mk
